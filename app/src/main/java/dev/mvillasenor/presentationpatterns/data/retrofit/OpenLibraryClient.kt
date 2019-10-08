@@ -8,6 +8,6 @@ import retrofit2.http.Query
 interface OpenLibraryClient {
 
     @GET("search.json")
-    fun searchAsync(@Query("q") query: String, @Query("page") page: Int?): Deferred<SearchResult>
+    suspend fun searchAsync(@Query("q") query: String, @Query("page") page: Int?): SearchResult
 
 }

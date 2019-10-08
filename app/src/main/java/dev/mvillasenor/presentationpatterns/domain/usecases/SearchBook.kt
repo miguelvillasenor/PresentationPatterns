@@ -19,7 +19,6 @@ class OpenLibrarySearchBook(
     override suspend fun invoke(query: String, page: Int): SearchResult = withContext(Dispatchers.IO) {
         openLibraryRepository
             .search(query, page)
-            .await()
             .toEntity(page)
     }
 

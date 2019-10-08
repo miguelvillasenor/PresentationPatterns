@@ -9,6 +9,6 @@ class RetrofitOpenLibraryRepository(retrofit: Retrofit) : OpenLibraryRepository 
 
     private val openLibraryClient: OpenLibraryClient = retrofit.create(OpenLibraryClient::class.java)
 
-    override fun search(query: String, page: Int?): Deferred<SearchResult> = openLibraryClient.searchAsync(query, page)
+    override suspend fun search(query: String, page: Int?): SearchResult = openLibraryClient.searchAsync(query, page)
 
 }
