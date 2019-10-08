@@ -5,6 +5,6 @@ import kotlinx.coroutines.Deferred
 
 interface OpenLibraryRepository {
 
-    fun search(query: String, page: Int? = null): Deferred<SearchResult>
+    suspend fun search(query: String, page: Int? = null): SearchResult
 
 }

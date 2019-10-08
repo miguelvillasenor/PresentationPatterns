@@ -1,6 +1,5 @@
 package dev.mvillasenor.presentationpatterns.data
 
-import com.jakewharton.retrofit2.adapter.kotlin.coroutines.CoroutineCallAdapterFactory
 import dev.mvillasenor.presentationpatterns.data.repositories.OpenLibraryRepository
 import dev.mvillasenor.presentationpatterns.data.repositories.RetrofitOpenLibraryRepository
 import okhttp3.OkHttpClient
@@ -17,7 +16,6 @@ val dataModule = module {
         Retrofit.Builder()
             .client(get())
             .addConverterFactory(GsonConverterFactory.create())
-            .addCallAdapterFactory(CoroutineCallAdapterFactory())
             .baseUrl("http://openlibrary.org/")
             .build()
     }

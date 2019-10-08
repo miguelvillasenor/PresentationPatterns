@@ -3,6 +3,8 @@ package dev.mvillasenor.presentationpatterns.domain.usecases
 import com.mvillasenor.bookfinder.domain.SearchResult
 import dev.mvillasenor.presentationpatterns.data.repositories.OpenLibraryRepository
 import dev.mvillasenor.presentationpatterns.domain.toEntity
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.withContext
 
 interface SearchBook {
 
@@ -15,9 +17,10 @@ class OpenLibrarySearchBook(
 ) : SearchBook {
 
     override suspend fun invoke(query: String, page: Int): SearchResult =
-        openLibraryRepository
-            .search(query, page)
-            .await()
-            .toEntity(page)
+        withContext(Dispatchers.IO) {
+            openLibraryRepository
+                .search(query, page)
+                .toEntity(page)
+        }
 
 }

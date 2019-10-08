@@ -4,6 +4,7 @@ import android.os.Bundle
 import android.text.Editable
 import android.text.TextWatcher
 import androidx.appcompat.app.AppCompatActivity
+import androidx.lifecycle.Observer
 import androidx.lifecycle.observe
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.mvillasenor.bookfinder.domain.Book
@@ -52,7 +53,9 @@ class SearchActivityActivity : AppCompatActivity() {
             viewModel.performSearch(searchText.text.toString())
         }
 
-        viewModel.searchResult.observe(this, ::handleResult)
+        viewModel.searchResult.observe(this, Observer {
+            handleResult(it)
+        })
     }
 
     private fun handleResult(result: Resource<List<Book>>) {

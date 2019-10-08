@@ -7,11 +7,10 @@ import androidx.lifecycle.viewModelScope
 import com.mvillasenor.bookfinder.domain.Book
 import dev.mvillasenor.presentationpatterns.domain.usecases.SearchBook
 import dev.mvillasenor.presentationpatterns.ui.common.Resource
-import kotlinx.coroutines.CancellationException
 import kotlinx.coroutines.cancelChildren
 import kotlinx.coroutines.launch
 import timber.log.Timber
-import java.lang.Exception
+import java.io.IOException
 
 class SearchViewModel(private val searchBook: SearchBook) : ViewModel() {
 
@@ -26,9 +25,7 @@ class SearchViewModel(private val searchBook: SearchBook) : ViewModel() {
                 _searchResult.postValue(Resource.loading())
                 val result = searchBook.invoke(query, 1)
                 _searchResult.postValue(Resource.success(result.books))
-            } catch (e: CancellationException) {
-                Timber.d("Search canceled")
-            } catch (e: Exception) {
+            } catch (e: IOException) {
                 Timber.e(e)
                 _searchResult.postValue(Resource.error("Error performing search"))
             }
