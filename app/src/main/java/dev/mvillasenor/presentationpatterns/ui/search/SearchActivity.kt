@@ -16,7 +16,7 @@ import kotlinx.android.synthetic.main.view_error.*
 import org.koin.android.ext.android.inject
 import org.koin.core.parameter.parametersOf
 
-class SearchActivity : AppCompatActivity(), Search.View {
+class SearchActivity : AppCompatActivity() {
 
     val presenter: Search.Presenter by inject { parametersOf(this) }
     private val searchController: SearchController by inject()
@@ -52,19 +52,5 @@ class SearchActivity : AppCompatActivity(), Search.View {
     override fun onPause() {
         super.onPause()
         presenter.stop()
-    }
-
-    override fun showResults(searchResult: SearchResult) {
-        animator.displayedChild = SUCCESS_VIEW_INDEX
-        searchController.setData(searchResult.books)
-    }
-
-    override fun showError(error: String) {
-        animator.displayedChild = ERROR_VIEW_INDEX
-        errorMessage.text = error
-    }
-
-    override fun showLoading() {
-        animator.displayedChild = LOADING_VIEW_INDEX
     }
 }

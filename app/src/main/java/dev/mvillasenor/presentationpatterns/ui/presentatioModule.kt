@@ -6,6 +6,6 @@ import dev.mvillasenor.presentationpatterns.ui.search.SearchPresenter
 import org.koin.dsl.module.module
 
 val presentationModule = module {
-    factory { (view: Search.View) -> SearchPresenter(view, get()) as Search.Presenter }
+    //factory { (view: Search.View) -> SearchPresenter(view, get()) as Search.Presenter }
     factory { SearchController() }
 }
