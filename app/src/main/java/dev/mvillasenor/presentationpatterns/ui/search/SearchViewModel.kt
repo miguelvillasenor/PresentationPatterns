@@ -18,18 +18,4 @@ class SearchViewModel(private val searchBook: SearchBook) : ViewModel() {
     val searchResult get() = _searchResult as LiveData<Resource<List<Book>>>
 
 
-    fun performSearch(query: String) {
-        viewModelScope.coroutineContext.cancelChildren()
-        viewModelScope.launch {
-            try {
-                _searchResult.postValue(Resource.loading())
-                val result = searchBook.invoke(query, 1)
-                _searchResult.postValue(Resource.success(result.books))
-            } catch (e: IOException) {
-                Timber.e(e)
-                _searchResult.postValue(Resource.error("Error performing search"))
-            }
-        }
-    }
-
 }

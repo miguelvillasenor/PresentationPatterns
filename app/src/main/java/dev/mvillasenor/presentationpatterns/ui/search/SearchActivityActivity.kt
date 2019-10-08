@@ -44,18 +44,16 @@ class SearchActivityActivity : AppCompatActivity() {
 
             override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {
                 if (s != null && s.isNotEmpty()) {
-                    viewModel.performSearch(s.toString())
+                    // Send event to viewModel
                 }
             }
         })
 
         retry.setOnClickListener {
-            viewModel.performSearch(searchText.text.toString())
+            // Send event to view  model
         }
 
-        viewModel.searchResult.observe(this, Observer {
-            handleResult(it)
-        })
+        // Subscibe to viewModel changes
     }
 
     private fun handleResult(result: Resource<List<Book>>) {
